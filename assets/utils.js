@@ -24,3 +24,10 @@ export const fahrenheitToCelsius = (fahrenheit) => {
 
     return parseFloat(celsius.toFixed(1));
 };
+
+// Converts m/s to km/h and formats for display.
+export const formatWindSpeed = (speed) => {
+    const kmh = Math.round(speed * 3.6);
+
+    return `${kmh} km/h`;
+};
