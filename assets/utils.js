@@ -31,3 +31,11 @@ export const formatWindSpeed = (speed) => {
 
     return `${kmh} km/h`;
 };
+
+// Get weekday short for forecast display
+export const getWeekdayShort = (date) => {
+    const options = {weekday: 'short'};
+    const formatter = new Intl.DateTimeFormat('pt-BR', options);
+    
+    return formatter.format(date).slice(0, 3).toLowerCase();
+};
