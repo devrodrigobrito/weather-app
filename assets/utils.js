@@ -39,3 +39,8 @@ export const getWeekdayShort = (date) => {
     
     return formatter.format(date).slice(0, 3).toLowerCase();
 };
+
+// Get the weather forecast icon URL generator utility
+export const getWeatherIconUrl = (iconCode, size = '2x') => {
+    return `https://openweathermap.org/img/wn/${iconCode}@${size}.png`
+};
