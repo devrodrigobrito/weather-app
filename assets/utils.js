@@ -52,3 +52,22 @@ export const capitalize = (text) => {
 
     return lowercase.replace(/^\w/, (c) => c.toUpperCase());
 };
+
+// Weather description translation utility
+const weatherTranslations = {
+    "clear sky": "Céu limpo", 
+    "few clouds": "Poucas nuvens",
+    "scattered clouds": "Nuvens dispersas",
+    "broken clouds": "Nublado",
+    "overcast clouds": "Encoberto",
+    "light rain": "Chuva leve", 
+    "moderate rain": "Chuva moderada",
+    "heavy rain": "Chuva forte", 
+    "thunderstorm": "Tempestade"
+ };
+
+export const translateWeatherDescription = (description) => {
+    const translation = weatherTranslations[description.toLowerCase()];
+
+    return translation || capitalize(description);
+};
