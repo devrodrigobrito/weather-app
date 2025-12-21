@@ -8,7 +8,7 @@ export const formatDate = (date) => {
     const formatter = new Intl.DateTimeFormat('pt-BR', options);
     
     //Formats and capitalizes only the first letter of the string.
-    return formatter.format(date).replace(/^\w/, (c) => c.toUpperCase());
+    return capitalize(formatter.format(date));
 };
 
 // Converts Celsius to Fahrenheit with 1 decimal place accuracy.
@@ -43,4 +43,12 @@ export const getWeekdayShort = (date) => {
 // Get the weather forecast icon URL generator utility
 export const getWeatherIconUrl = (iconCode, size = '2x') => {
     return `https://openweathermap.org/img/wn/${iconCode}@${size}.png`
+};
+
+// standardize the dashboard text
+export const capitalize = (text) => {
+    if(!text) return '';
+    const lowercase = text.toLowerCase();
+
+    return lowercase.replace(/^\w/, (c) => c.toUpperCase());
 };
