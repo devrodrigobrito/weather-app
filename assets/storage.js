@@ -56,3 +56,11 @@ export const removeFavorite = (cityName) => {
 
     return removedSomething; 
 };
+
+
+export const isFavorite = (cityName) => {
+    const favorites = getFavorites();
+
+    return favorites.some(item => 
+    item.city.toLowerCase() === cityName.toLowerCase());
+};
