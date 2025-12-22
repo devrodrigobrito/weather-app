@@ -30,7 +30,9 @@ export const saveFavorites = (favorites) => {
 
 export const addFavorite = (cityData) => {
     const favorites = getFavorites();
-    const alreadyExists = favorites.find(item => item.city.toLowerCase() === cityData.city.toLowerCase());
+
+    const alreadyExists = favorites.find(item => 
+    item.city.toLowerCase() === cityData.city.toLowerCase());
 
   if(alreadyExists){
     return false;
@@ -39,4 +41,18 @@ export const addFavorite = (cityData) => {
   favorites.push(cityData);
   saveFavorites(favorites);
   return true;
+};
+
+
+export const removeFavorite = (cityName) => {
+    const favorites = getFavorites();
+
+    const filteredList = favorites.filter(item => 
+    item.city.toLowerCase() !== cityName.toLowerCase());
+    
+    const removedSomething = filteredList.length < favorites.length;
+
+    saveFavorites(filteredList);
+
+    return removedSomething; 
 };
