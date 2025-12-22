@@ -26,3 +26,17 @@ export const saveFavorites = (favorites) => {
         return false;
     }
 };
+
+
+export const addFavorite = (cityData) => {
+    const favorites = getFavorites();
+    const alreadyExists = favorites.find(item => item.city.toLowerCase() === cityData.city.toLowerCase());
+
+  if(alreadyExists){
+    return false;
+  }
+
+  favorites.push(cityData);
+  saveFavorites(favorites);
+  return true;
+};
