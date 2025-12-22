@@ -6,9 +6,23 @@ export const getFavorites = () => {
         const favoritesCity = localStorage.getItem(STORAGE_KEY);
         if(!favoritesCity) return [];
 
-        return JSON.parse(favoritesCity)
+        return JSON.parse(favoritesCity);
     }catch(error){
         console.error('Erro ao ler favoritos:', error);
         return [];
     }  
+};
+
+
+export const saveFavorites = (favorites) => {
+    try{
+        const favoritesString = JSON.stringify(favorites);
+        localStorage.setItem(STORAGE_KEY, favoritesString);
+
+        return true;
+    }catch (error){
+        console.error('Erro ao salvar no localStorage:', error);
+
+        return false;
+    }
 };
