@@ -68,3 +68,14 @@ export const getWeatherByCoords = async (lat, lon) => {
         return null;
     }
 };
+
+
+export const processForecastData = (forecastData) => {
+    if(!forecastData || !forecastData.list) return [];
+
+    const dailyData = forecastData.list.filter(item => {
+        return item.dt_txt.includes('12:00:00');
+    });
+
+    return dailyData.slice(0, 5);
+};
