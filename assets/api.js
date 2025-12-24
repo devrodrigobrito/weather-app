@@ -32,3 +32,21 @@ export const getCurrentWeather = async (city) => {
         return null;
     }
 };
+
+
+export const getForecast = async (city) => {
+    try {
+        const url = buildUrl('forecast', {q: city});
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error('Cidade não encontrada');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error ao buscar previsão:', error.message);
+        return null;
+    }
+};
