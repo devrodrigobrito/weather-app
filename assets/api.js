@@ -50,3 +50,21 @@ export const getForecast = async (city) => {
         return null;
     }
 };
+
+
+export const getWeatherByCoords = async (lat, lon) => {
+    try {
+        const url = buildUrl('weather', {lat, lon});
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error('Coordenadas inválidas');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error ao buscar clima por coordenadas:', error.message);
+        return null;
+    }
+};
