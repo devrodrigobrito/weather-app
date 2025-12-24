@@ -1,8 +1,13 @@
+// =========================================================================
+// API MODULE FOR WEATHER DATA FETCHING
+// =========================================================================
 const API_KEY = 'MINHA_API_KEY_AQUI';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const UNITS = 'metric';
 const LANG = 'pt_br'; 
 
+
+// Constructs a full URL with query parameters for the OpenWeather API
 export const buildUrl = (endpoint, params) => {
     const searchParams = {
         ... params,
@@ -16,6 +21,7 @@ export const buildUrl = (endpoint, params) => {
 };
 
 
+// Fetches current weather data for a specific city
 export const getCurrentWeather = async (city) => {
     try {
         const url = buildUrl('weather', {q: city});
@@ -34,6 +40,7 @@ export const getCurrentWeather = async (city) => {
 };
 
 
+// Fetches 5-day forecast data for a specific city
 export const getForecast = async (city) => {
     try {
         const url = buildUrl('forecast', {q: city});
@@ -52,6 +59,7 @@ export const getForecast = async (city) => {
 };
 
 
+// Fetches weather data using geographic coordinates (latitude and longitude)
 export const getWeatherByCoords = async (lat, lon) => {
     try {
         const url = buildUrl('weather', {lat, lon});
@@ -70,6 +78,7 @@ export const getWeatherByCoords = async (lat, lon) => {
 };
 
 
+// Filters raw forecast data to return only noon reports for the next 5 days
 export const processForecastData = (forecastData) => {
     if(!forecastData || !forecastData.list) return [];
 
