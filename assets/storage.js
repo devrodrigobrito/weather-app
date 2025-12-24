@@ -1,5 +1,5 @@
 // =========================================================================
-// LOCALSTORAGE MANAGEMENT
+// LOCALSTORAGE MANAGEMENT FOR FAVORITE CITIES
 // =========================================================================
 
 const STORAGE_KEY = 'weatherapp_favorites';
@@ -51,7 +51,7 @@ export const addFavorite = (cityData) => {
 };
 
 
-//Remove a city from the favorites list by name.
+//Remove a city from the favorites list by name
 export const removeFavorite = (cityName) => {
     const favorites = getFavorites();
 
