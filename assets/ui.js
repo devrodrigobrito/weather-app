@@ -28,3 +28,14 @@ export const updateMainWeather = (data) => {
     weatherIconLargeEl.innerHTML = `<img src="${iconUrl}" alt="Clima" class="w-full">`;
 };
 
+
+export const updateWeatherMetrics = (data) => {
+    humidityEl.textContent = `${data.main.humidity}%`;
+    windEl.textContent = formatWindSpeed(data.wind.speed);
+    pressureEl.textContent = `${data.main.pressure} hPa`;
+    feelsLikeEl.textContent = `${Math.round(data.main.feels_like)}°`;
+}
+
+
+
+
