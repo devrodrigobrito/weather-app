@@ -34,7 +34,30 @@ export const updateWeatherMetrics = (data) => {
     windEl.textContent = formatWindSpeed(data.wind.speed);
     pressureEl.textContent = `${data.main.pressure} hPa`;
     feelsLikeEl.textContent = `${Math.round(data.main.feels_like)}°`;
-}
+};
+
+
+
+export const updateForecast = (forecastList) => {
+    let html = '';
+
+    forecastList.forEach(forecast => {
+        const date = new Date(forecast.dt * 1000);
+        const weekday = getWeekdayShort(date);
+        const iconUrl = getWeatherIconUrl(forecast.weather[0].icon, '2x');
+        const tempMax = `${Math.round(forecast.main.temp_max)}°`;
+        const tempMin = `${Math.round(forecast.main.temp_min)}°`; 
+
+    html += `<div class="flex items-center justify-between">
+    <span class="w-10 text-sm">${weekday}</span>
+    <img src="${iconUrl}" class="w-8" />
+    <span class="font-semibold text-white">${tempMax}</span>
+    <span class="text-slate-500 text-sm">${tempMin}</span>
+   </div>`
+    });
+
+    forecastContainerEl.innerHTML = html;
+};
 
 
 
