@@ -92,8 +92,20 @@ const loadWeatherByLocation = () => {
 
 const renderFavorites = () => {
     const favorites = getFavorites();
-    
+
     updateFavoritesList(favorites, (city) => {
         loadWeatherData(city);
     });
 };
+
+
+cityInputEl.addEventListener('keypress', (event) => {
+    if(event.key === 'Enter'){
+    const city = cityInputEl.value.trim();
+
+       if(city !== ''){
+        loadWeatherData(city);
+        cityInputEl.value = '';
+       }
+    }
+});
