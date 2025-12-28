@@ -16,6 +16,7 @@ const windEl = document.getElementById('wind');
 const pressureEl = document.getElementById('pressure');
 const feelsLikeEl = document.getElementById('feels-like');
 const forecastContainerEl = document.getElementById('forecast-container');
+const favoritesListEl = document.getElementById('favorite-list');
 
 
 export const updateMainWeather = (data) => {
@@ -57,6 +58,28 @@ export const updateForecast = (forecastList) => {
     });
 
     forecastContainerEl.innerHTML = html;
+};
+
+
+export const updateFavoritesList = (favorites, onCityClick) => {
+    favoritesListEl.innerHTML = '';
+
+    if(favorites.length === 0){
+    favoritesListEl.innerHTML = `<li class="text-slate-500 text-sm p-3">Nenhuma cidade salva</li>`;
+    return;
+    }
+
+    favorites.forEach(favorite => {
+        const li = document.createElement('li');
+        li.className = 'flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition';
+
+        li.innerHTML = `<span>${favorite.city}</span>
+                       <span class="text-sm font-semibold">${Math.round(favorite.temp)}°</span>`
+
+        li.onclick = () => onCityClick(favorite.city);
+
+        favoritesListEl.appendChild(li);               
+    }); 
 };
 
 
