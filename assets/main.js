@@ -87,3 +87,13 @@ const loadWeatherByLocation = () => {
             showError('Permissão de localização negada ou sinal indisponível');
         });   
 }; 
+
+
+
+const renderFavorites = () => {
+    const favorites = getFavorites();
+    
+    updateFavoritesList(favorites, (city) => {
+        loadWeatherData(city);
+    });
+};
