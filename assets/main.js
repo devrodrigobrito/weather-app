@@ -55,3 +55,35 @@ const loadWeatherData = async (city) => {
         showError('Erro ao carregar dados meteorológicos');
     }
 }; 
+
+
+
+const loadWeatherByLocation = () => {
+
+        if(!navigator.geolocation){
+            showError('Geolocalização não suportada pelo navegador');
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+        try{
+            const {latitude, longitude} = position.coords;
+            const weatherData = await getWeatherByCoords(latitude, longitude);
+
+            const forecastData = await getForecast(weatherData.name);
+            const processedForecast = processForecastData(forecastData);
+            updateForecast(processedForecast);
+
+            updateMainWeather(weatherData);
+            updateWeatherMetrics(weatherData);
+
+            currentCity = weatherData.name;
+            currentTemp = weatherData.main.temp;
+
+        }catch(error){
+            showError('Erro ao obter dados meteorológicos pela localização');
+        } 
+        }, (error) => {
+            showError('Permissão de localização negada ou sinal indisponível');
+        });   
+}; 
