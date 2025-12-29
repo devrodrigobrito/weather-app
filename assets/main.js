@@ -109,3 +109,8 @@ cityInputEl.addEventListener('keypress', (event) => {
        }
     }
 });
+
+
+geoBtnEl.addEventListener('click', () => {
+    loadWeatherByLocation();
+});
