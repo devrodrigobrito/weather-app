@@ -114,3 +114,11 @@ cityInputEl.addEventListener('keypress', (event) => {
 geoBtnEl.addEventListener('click', () => {
     loadWeatherByLocation();
 });
+
+
+const init = () => {
+    loadWeatherData('São Paulo');
+    renderFavorites();
+};
+
+document.addEventListener('DOMContentLoaded', init);
