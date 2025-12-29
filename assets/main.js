@@ -29,7 +29,7 @@ let currentUnit = 'celsius';
 
 const cityInputEl = document.getElementById('city-input');
 const geoBtnEl = document.getElementById('geo-btn');
-
+const favoritebtnEl = document.getElementById('favorite-btn');
 
 
 const loadWeatherData = async (city) => {
@@ -114,6 +114,21 @@ cityInputEl.addEventListener('keypress', (event) => {
 geoBtnEl.addEventListener('click', () => {
     loadWeatherByLocation();
 });
+
+
+const toggleFavorite = () => {
+    if(!currentCity) return;
+
+    if(isFavorite(currentCity)){
+        removeFavorite(currentCity);
+    }else{
+        addFavorite({city: currentCity, temp: currentTemp});
+    }
+
+    renderFavorites();
+};
+
+favoritebtnEl.addEventListener('click', toggleFavorite);
 
 
 const init = () => {
