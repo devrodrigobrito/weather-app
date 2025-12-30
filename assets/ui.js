@@ -16,7 +16,7 @@ const windEl = document.getElementById('wind');
 const pressureEl = document.getElementById('pressure');
 const feelsLikeEl = document.getElementById('feels-like');
 const forecastContainerEl = document.getElementById('forecast-container');
-const favoritesListEl = document.getElementById('favorite-list');
+const favoritesListEl = document.getElementById('favorites-list');
 
 
 export const updateMainWeather = (data) => {

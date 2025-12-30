@@ -23,13 +23,24 @@ import {
 } from './storage.js';
 
 
+import {
+    celsiusToFahrenheit,
+    fahrenheitToCelsius,
+} from './utils.js';
+
+
 let currentCity = null;
 let currentTemp = null;
 let currentUnit = 'celsius';
+let currentfeelslike = null;
 
 const cityInputEl = document.getElementById('city-input');
 const geoBtnEl = document.getElementById('geo-btn');
 const favoritebtnEl = document.getElementById('favorite-btn');
+const celsiusBtnEl = document.getElementById('celsius-btn');
+const fahrenheitBtnEl = document.getElementById('fahrenheit-btn');
+const tempMainEl = document.getElementById('temp-main');
+const feelslikeEl = document.getElementById('feels-like');
 
 
 const loadWeatherData = async (city) => {
@@ -50,6 +61,9 @@ const loadWeatherData = async (city) => {
 
         currentCity = weatherData.name;
         currentTemp = weatherData.main.temp;
+        currentfeelslike = weatherData.main.feels_like;
+
+        updateTemperatureDisplay();
 
     }catch(error){
         showError('Erro ao carregar dados meteorológicos');
@@ -79,6 +93,8 @@ const loadWeatherByLocation = () => {
 
             currentCity = weatherData.name;
             currentTemp = weatherData.main.temp;
+
+            updateTemperatureDisplay();
 
         }catch(error){
             showError('Erro ao obter dados meteorológicos pela localização');
@@ -137,3 +153,46 @@ const init = () => {
 };
 
 document.addEventListener('DOMContentLoaded', init);
+
+
+const convertTemperature = (temp, unit) => {
+
+    if(unit === 'fahrenheit'){
+        return celsiusToFahrenheit(temp);
+    }
+
+    return temp;
+};
+
+
+const updateTemperatureDisplay = () => {
+    if(currentTemp === null) return;
+
+    const convertedTemp = convertTemperature(currentTemp, currentUnit);
+    tempMainEl.textContent = `${Math.round(convertedTemp)}°`;
+
+    if(currentfeelslike !== null){
+        const convertedFeels = convertTemperature(currentfeelslike, currentUnit);
+        feelslikeEl.textContent = `${Math.round(convertedFeels)}°`;  
+    }
+}
+
+
+const toggleUnit = (unit) => {
+    if(unit === currentUnit) return;
+
+    currentUnit = unit;
+
+    if(unit === 'celsius'){
+        celsiusBtnEl.className = 'px-4 py-1 bg-blue-500 rounded-md text-sm font-bold transition';
+        fahrenheitBtnEl.className = 'px-4 py-1 text-slate-400 text-sm hover:text-white transition';
+    }else{
+        celsiusBtnEl.className = 'px-4 py-1 text-slate-400 text-sm hover:text-white transition';
+        fahrenheitBtnEl.className = 'px-4 py-1 bg-blue-500 rounded-md text-sm font-bold transition';
+    }
+
+    updateTemperatureDisplay();
+};
+
+celsiusBtnEl.addEventListener('click', () => toggleUnit('celsius'));
+fahrenheitBtnEl.addEventListener('click', () => toggleUnit('fahrenheit'));
