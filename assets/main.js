@@ -28,11 +28,14 @@ import {
     fahrenheitToCelsius,
 } from './utils.js';
 
+import { createTempChart } from './chart.js';
+
 
 let currentCity = null;
 let currentTemp = null;
 let currentUnit = 'celsius';
 let currentfeelslike = null;
+let lastForecastData = null;
 
 const cityInputEl = document.getElementById('city-input');
 const geoBtnEl = document.getElementById('geo-btn');
@@ -53,11 +56,13 @@ const loadWeatherData = async (city) => {
         }
 
         const forecastData = await getForecast(city);
+        lastForecastData = forecastData;
         const processedForecast = processForecastData(forecastData);
 
         updateMainWeather(weatherData);
         updateWeatherMetrics(weatherData);
         updateForecast(processedForecast);
+        createTempChart(forecastData, currentUnit);
 
         currentCity = weatherData.name;
         currentTemp = weatherData.main.temp;
@@ -66,6 +71,7 @@ const loadWeatherData = async (city) => {
         updateTemperatureDisplay();
 
     }catch(error){
+        console.error(error);
         showError('Erro ao carregar dados meteorológicos');
     }
 }; 
@@ -192,6 +198,10 @@ const toggleUnit = (unit) => {
     }
 
     updateTemperatureDisplay();
+
+    if(lastForecastData){
+        createTempChart(lastForecastData, currentUnit);
+    }
 };
 
 celsiusBtnEl.addEventListener('click', () => toggleUnit('celsius'));
