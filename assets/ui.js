@@ -1,3 +1,7 @@
+// =========================================================================
+// UI UPDATES MODULE
+// =========================================================================
+
 import { 
     formatDate, 
     formatWindSpeed, 
@@ -19,6 +23,7 @@ const forecastContainerEl = document.getElementById('forecast-container');
 const favoritesListEl = document.getElementById('favorites-list');
 
 
+// updates the main weather display with current weather data
 export const updateMainWeather = (data) => {
     cityNameEl.textContent = data.name;
     currentDateEl.textContent = formatDate(new Date());
@@ -30,6 +35,7 @@ export const updateMainWeather = (data) => {
 };
 
 
+// updates weather metrics like humidity, wind speed, pressure, and feels like temperatura
 export const updateWeatherMetrics = (data) => {
     humidityEl.textContent = `${data.main.humidity}%`;
     windEl.textContent = formatWindSpeed(data.wind.speed);
@@ -38,7 +44,7 @@ export const updateWeatherMetrics = (data) => {
 };
 
 
-
+// updates the forecast display with forecast data
 export const updateForecast = (forecastList) => {
     let html = '';
 
@@ -61,6 +67,7 @@ export const updateForecast = (forecastList) => {
 };
 
 
+// updates the favorites list display with saved favorite cities
 export const updateFavoritesList = (favorites, onCityClick) => {
     favoritesListEl.innerHTML = '';
 
@@ -83,6 +90,7 @@ export const updateFavoritesList = (favorites, onCityClick) => {
 };
 
 
+// shows an alert with the provided error message
 export const showError = (message) => {
     alert(message);
 };

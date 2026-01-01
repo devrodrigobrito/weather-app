@@ -1,3 +1,7 @@
+// =========================================================================
+// MAIN JAVASRIPT MODULE FOR WEATHER APPLICATION
+// =========================================================================
+
 import {
     getCurrentWeather,
     getForecast,
@@ -46,6 +50,7 @@ const tempMainEl = document.getElementById('temp-main');
 const feelslikeEl = document.getElementById('feels-like');
 
 
+// loads weather data for a specified city and updates the UI accordingly
 const loadWeatherData = async (city) => {
     try{
         const weatherData = await getCurrentWeather(city);
@@ -77,7 +82,7 @@ const loadWeatherData = async (city) => {
 }; 
 
 
-
+// loads weather data based on the user's current geographic location
 const loadWeatherByLocation = () => {
 
         if(!navigator.geolocation){
@@ -99,6 +104,7 @@ const loadWeatherByLocation = () => {
 
             currentCity = weatherData.name;
             currentTemp = weatherData.main.temp;
+            currentfeelslike = weatherData.main.feels_like;
 
             updateTemperatureDisplay();
 
@@ -111,7 +117,7 @@ const loadWeatherByLocation = () => {
 }; 
 
 
-
+// renders the list of favorite cities in the UI
 const renderFavorites = () => {
     const favorites = getFavorites();
 
@@ -121,6 +127,7 @@ const renderFavorites = () => {
 };
 
 
+// handles user input and loads weather data for the specified city
 cityInputEl.addEventListener('keypress', (event) => {
     if(event.key === 'Enter'){
     const city = cityInputEl.value.trim();
@@ -133,11 +140,13 @@ cityInputEl.addEventListener('keypress', (event) => {
 });
 
 
+// handles geolocation button click to load weather data based on user's location
 geoBtnEl.addEventListener('click', () => {
     loadWeatherByLocation();
 });
 
 
+// toggles the favorite status of the current city
 const toggleFavorite = () => {
     if(!currentCity) return;
 
@@ -153,6 +162,7 @@ const toggleFavorite = () => {
 favoritebtnEl.addEventListener('click', toggleFavorite);
 
 
+// initializes the application by loading default weather data and rendering favorites
 const init = () => {
     loadWeatherData('São Paulo');
     renderFavorites();
@@ -161,6 +171,7 @@ const init = () => {
 document.addEventListener('DOMContentLoaded', init);
 
 
+// converts temperature between Celsius and fahrenheit based on the selected unit
 const convertTemperature = (temp, unit) => {
 
     if(unit === 'fahrenheit'){
@@ -171,6 +182,7 @@ const convertTemperature = (temp, unit) => {
 };
 
 
+// updates the temperature display based on the selected unit
 const updateTemperatureDisplay = () => {
     if(currentTemp === null) return;
 
@@ -181,9 +193,10 @@ const updateTemperatureDisplay = () => {
         const convertedFeels = convertTemperature(currentfeelslike, currentUnit);
         feelslikeEl.textContent = `${Math.round(convertedFeels)}°`;  
     }
-}
+};
 
 
+// toggles between Celsius and Fahrenheit units
 const toggleUnit = (unit) => {
     if(unit === currentUnit) return;
 

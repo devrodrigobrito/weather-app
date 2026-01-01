@@ -1,11 +1,13 @@
-import {
-    celsiusToFahrenheit
-}from './utils.js';
+// =========================================================================
+// CHART MODULE FOR CREATING AND MANAGING TEMPERATURE CHARTS
+// =========================================================================
+
+import {celsiusToFahrenheit}from './utils.js';
 
 const tempChartEl = document.getElementById('tempChart');
 let tempChart = null;
 
-
+// prepares data for the temperature chart based on forecast data and selected unit
 export const prepareChartData = (forecastData, unit) => {
     const nextHours = forecastData.list.slice(0, 8);
 
@@ -29,7 +31,7 @@ export const prepareChartData = (forecastData, unit) => {
 };
 
 
-
+// creates or updates the temperature chart with the provided data and unit
 export const createTempChart = (chartData, unit) => {
 
     if(tempChart) tempChart.destroy();
