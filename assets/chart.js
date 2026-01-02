@@ -7,6 +7,7 @@ import {celsiusToFahrenheit}from './utils.js';
 const tempChartEl = document.getElementById('tempChart');
 let tempChart = null;
 
+
 // prepares data for the temperature chart based on forecast data and selected unit
 export const prepareChartData = (forecastData, unit) => {
     const nextHours = forecastData.list.slice(0, 8);
@@ -59,12 +60,24 @@ export const createTempChart = (chartData, unit) => {
             plugins: {
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.parsed.y}°`;
+                        }
+                    }
                 }
             },
             scales: {
                 y: {
-                    ticks: { color: 'rgb(148, 163, 184)' },
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                    ticks: {
+                        color: 'rgb(148, 163, 184)',
+                        callback: function(value) {
+                            return `${Math.round(value)}°`;
+                        },
+                    },
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' } 
                 },
                 x: {
                     ticks: { color: 'rgb(148, 163, 184)' },

@@ -48,6 +48,7 @@ const celsiusBtnEl = document.getElementById('celsius-btn');
 const fahrenheitBtnEl = document.getElementById('fahrenheit-btn');
 const tempMainEl = document.getElementById('temp-main');
 const feelslikeEl = document.getElementById('feels-like');
+const favoriteIconEl = document.getElementById('favorite-icon');
 
 
 // loads weather data for a specified city and updates the UI accordingly
@@ -73,6 +74,7 @@ const loadWeatherData = async (city) => {
         currentTemp = weatherData.main.temp;
         currentfeelslike = weatherData.main.feels_like;
 
+        updateFavoriteIcon();
         updateTemperatureDisplay();
 
     }catch(error){
@@ -105,7 +107,8 @@ const loadWeatherByLocation = () => {
             currentCity = weatherData.name;
             currentTemp = weatherData.main.temp;
             currentfeelslike = weatherData.main.feels_like;
-
+            
+            updateFavoriteIcon();
             updateTemperatureDisplay();
 
         }catch(error){
@@ -131,6 +134,10 @@ const renderFavorites = () => {
 cityInputEl.addEventListener('keypress', (event) => {
     if(event.key === 'Enter'){
     const city = cityInputEl.value.trim();
+
+    if(city === ''){
+        showError('Por favor, insira o nome de uma cidade');
+    }
 
        if(city !== ''){
         loadWeatherData(city);
@@ -159,7 +166,26 @@ const toggleFavorite = () => {
     renderFavorites();
 };
 
-favoritebtnEl.addEventListener('click', toggleFavorite);
+
+// updates the favorite icon based on the current favorite status
+const updateFavoriteIcon = () => {
+    if(!currentCity) return;
+
+    if(isFavorite(currentCity)){
+        favoriteIconEl.classList.remove('text-slate-400');
+        favoriteIconEl.classList.add('text-yellow-400');
+        favoritebtnEl.title = 'Remover dos favoritos';
+    }else{
+        favoriteIconEl.classList.remove('text-yellow-400');
+        favoriteIconEl.classList.add('text-slate-400');
+        favoritebtnEl.title = 'Adicionar aos favoritos';
+    }
+}
+
+favoritebtnEl.addEventListener('click', () => {
+    toggleFavorite();
+    updateFavoriteIcon();
+});
 
 
 // initializes the application by loading default weather data and rendering favorites
