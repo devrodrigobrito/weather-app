@@ -2,11 +2,12 @@
 // API MODULE FOR WEATHER DATA FETCHING
 // =========================================================================
 
-const API_KEY = 'c1225f59555dbbcdef944599b28b209a';
+import { API_KEY } from './config.js';
+
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const UNITS = 'metric';
-const LANG = 'pt_br'; 
-
+const LANG = 'pt_br';
+ 
 
 // Constructs a full URL with query parameters for the OpenWeather API
 export const buildUrl = (endpoint, params) => {
