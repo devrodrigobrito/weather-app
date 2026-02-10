@@ -100,10 +100,9 @@ Durante o desenvolvimento deste projeto, foram aplicados e consolidados os segui
 - ✅ Geolocalização do navegador
 - ✅ LocalStorage para persistência de dados
 
-### UI/UX
-- ✅ Design responsivo com TailwindCSS
+### UI
+- ✅ Design com TailwindCSS
 - ✅ Visualização de dados com Chart.js
-- ✅ Feedback visual ao usuário
 - ✅ Estados de loading e erro
 
 ### Boas Práticas
