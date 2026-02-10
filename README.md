@@ -5,7 +5,7 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
 
-WeatherApp é uma aplicação de previsão meteorológica que oferece informações detalhadas sobre o clima em tempo real. Desenvolvida com foco em experiência do usuário, apresenta uma interface moderna com tema escuro, gráficos interativos e sistema de favoritos. O projeto utiliza a API do OpenWeatherMap para fornecer dados precisos e atualizados sobre temperatura, umidade, vento e previsão estendida.
+WeatherApp é uma aplicação de previsão meteorológica que oferece informações detalhadas sobre o clima em tempo real. O projeto utiliza a API do OpenWeatherMap para fornecer dados precisos e atualizados sobre temperatura, umidade, vento e previsão estendida.
 
 ---
 ## 📸 Demonstração
